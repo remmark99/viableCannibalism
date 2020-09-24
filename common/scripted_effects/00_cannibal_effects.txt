@@ -1,0 +1,147 @@
+###CHILD CONVERSION EFFECTS###
+
+child_cannibal_conversion_success_effect = {
+	scope:guardian = {
+		send_interface_toast = {
+			title = child_cannibal_conversion_success_effect.desc
+			left_icon = scope:child
+		}
+		scope:child = {
+			give_cannibal_secret_or_trait_effect = yes
+			random_secret = {
+				limit = { secret_type = secret_cannibal }
+				reveal_to = scope:guardian
+			}
+			add_opinion = {
+				target = scope:guardian
+				modifier = impressed_opinion
+				opinion = 30
+			}
+		}
+		scope:guardian = {
+			random_secret = {
+				limit = {
+					NOT = { is_known_by = scope:child }
+					secret_type = secret_guardian
+				}
+				reveal_to = scope:child
+			}
+			if = {
+				limit = { this = root }
+				hidden_effect = {
+					add_opinion = {
+						target = scope:child
+						modifier = pleased_opinion
+						opinion = 20
+					}
+				}
+			}
+			else = {
+				add_opinion = {
+					target = scope:child
+					modifier = pleased_opinion
+					opinion = 20
+				}
+			}
+		}
+	}
+}
+
+child_cannibal_conversion_failure_effect = {
+	scope:guardian = {
+		send_interface_toast = {
+			title = child_cannibal_conversion_failure_effect.desc
+			left_icon = scope:child
+		}
+		scope:child = {
+		 	add_opinion = {
+				target = scope:guardian
+				modifier = suspicion_opinion
+				opinion = -15
+			}
+		}
+		scope:guardian = {
+			if = {
+				limit = { this = root }
+				hidden_effect = {
+					add_opinion = {
+						target = scope:child
+						modifier = disappointed_opinion
+						opinion = -15
+					}
+				}
+			}
+			else = {
+				add_opinion = {
+					target = scope:child
+					modifier = disappointed_opinion
+					opinion = -15
+				}
+			}
+		}
+	}
+}
+
+child_cannibal_conversion_critical_failure_effect = {
+	scope:guardian = {
+		send_interface_toast = {
+			title = child_cannibal_conversion_critical_failure_effect.desc
+			left_icon = scope:child
+		}
+		scope:child = {
+		 	add_opinion = {
+				target = scope:guardian
+				modifier = hate_opinion
+				opinion = -30
+			}
+			scope:guardian = {
+				random_secret = {
+					limit = {
+						secret_type = secret_cannibal
+					}
+					save_scope_as = guardian_cannibal_secret
+					if = {
+						limit = { NOT = { is_known_by = scope:child } }
+						reveal_to = scope:child
+					}
+					if = {
+						limit = {
+							exists = scope:child.liege
+							NOR = {
+								is_known_by = scope:child.liege
+								scope:child = { is_ruler = yes }
+							}
+						}
+						scope:child.liege = {
+							send_interface_message = {
+								desc = child_cannibal_conversion_critical_failure_effect.liege.desc
+								left_icon = scope:guardian
+								right_icon = scope:child
+								scope:guardian_cannibal_secret = { reveal_to = scope:child.liege }
+							}
+						}
+					}
+				}
+			}
+		}
+		scope:guardian = {
+			if = {
+				limit = { this = root }
+				hidden_effect = {
+					add_opinion = {
+						target = scope:child
+						modifier = hate_opinion
+						opinion = -30
+					}
+				}
+			}
+			else = {
+				add_opinion = {
+					target = scope:child
+					modifier = hate_opinion
+					opinion = -30
+				}
+			}
+		}
+	}
+}

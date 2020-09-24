@@ -1,0 +1,1033 @@
+################
+# CANNIBAL EVENTS #
+################
+
+namespace = cannibal
+
+#cannibal.1001-1999 - Guardian coverts ward
+#cannibal.2001-2899 - Convert to cannibalism scheme
+#cannibal.2900-2999 - Reveal as cannibal interaction
+#
+
+##########################
+# GUARDIAN CONVERTS WARD #
+##########################
+
+cannibal.1001 = {
+	hidden = yes
+	
+	trigger = {
+		is_cannibal_trigger = no
+		any_relation = {
+			type = guardian
+			is_cannibal_trigger = yes
+		}
+	}
+
+	immediate = {
+		#If child (and guardian?) is AI, immediately convert them
+		if = {
+			limit = {
+				is_ai = yes
+				exists = house
+			}
+			house = {
+				house_head = {
+					add_to_list = cannibal_message
+				}
+			}
+			every_parent = {
+				limit = {
+					is_ruler = yes
+					is_cannibal_trigger = yes
+				}
+				add_to_list = cannibal_message
+			}
+			every_in_list = {
+				list = cannibal_message
+				send_interface_message = {
+					type = event_generic_good
+					title = cannibal.1001.message
+					left_icon = root
+					root = {
+						give_cannibal_secret_or_trait_effect = yes
+
+						random_secret = {
+							limit = { secret_type = secret_cannibal }
+							reveal_to = house.house_head
+						}
+					}
+				}
+			}
+		}
+		#For player children (or guardian?), send guardian choice event
+		else = {
+			save_scope_as = child
+			random_relation = { type = guardian trigger_event = cannibal.1002 }
+		}
+	}
+}	
+
+scripted_trigger cannibal_1002_allow_reveal_outcome_trigger = {
+	exists = scope:child.liege
+	scope:guardian = {
+		NOT = { this = scope:child.liege }
+		any_secret = {
+			secret_type = secret_cannibal
+			OR = {
+				NOT = { is_known_by = scope:child }
+				NOT = { is_known_by = scope:child.liege }
+			}
+		}
+	}
+}
+
+#Guardian: convert this child?
+cannibal.1002 = {
+	type = character_event
+	title = cannibal.1002.t
+	desc = cannibal.1002.desc
+	theme = witchcraft
+	override_background = {
+		event_background = study
+	}
+	left_portrait = scope:child
+
+	immediate = { save_scope_as = guardian }
+	
+	#Convert them
+	option = {
+		name = cannibal.1002.a
+
+		#Duel if child is AI
+		if = {
+			limit = { scope:child = { is_ai = yes } }
+			duel = {
+				skill = learning
+				target = scope:child
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 2.5
+					}
+					opinion_modifier = {
+						who = scope:child
+						opinion_target = scope:guardian
+						multiplier = 0.25
+						step = 5
+					}
+					modifier = {
+						scope:child = { has_trait = ambitious }
+						add = 20
+					}
+					modifier = {
+						scope:child = { has_trait = curious }
+						add = 20
+					}
+					desc = child_cannibal_conversion_success_effect.desc
+					child_cannibal_conversion_success_effect = yes
+				}
+				35 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -2.5
+					}
+					opinion_modifier = {
+						who = scope:child
+						opinion_target = scope:guardian
+						multiplier = -0.25
+						step = 5
+					}
+					modifier = {
+						scope:child = { has_trait = craven }
+						add = 30
+					}
+					desc = child_cannibal_conversion_failure_effect.desc
+					child_cannibal_conversion_failure_effect = yes
+				}
+				15 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -2.5
+					}
+					opinion_modifier = {
+						who = scope:child
+						opinion_target = scope:guardian
+						multiplier = -0.25
+						step = 5
+					}
+					modifier = {
+						scope:child = { has_trait = zealous }
+						add = 150
+					}
+					trigger = {
+						cannibal_1002_allow_reveal_outcome_trigger = yes
+					}
+					desc = child_cannibal_conversion_critical_failure_effect.desc
+					child_cannibal_conversion_critical_failure_effect = yes
+				}
+			}
+		}
+		else = {
+			show_as_tooltip = {
+				random_list = {
+					1 = {
+						show_chance = no
+						desc = child_cannibal_conversion_success_effect.desc
+						child_cannibal_conversion_success_effect = yes
+					}
+					1 = {
+						show_chance = no
+						desc = child_cannibal_conversion_failure_effect.desc
+						child_cannibal_conversion_failure_effect = yes
+					}
+					1 = {
+						show_chance = no
+						trigger = {
+							cannibal_1002_allow_reveal_outcome_trigger = yes
+						}
+						desc = child_cannibal_conversion_critical_failure_effect.desc
+						child_cannibal_conversion_critical_failure_effect = yes
+					}
+				}
+			}
+
+			scope:child = {
+				trigger_event = cannibal.1003
+			}
+		}
+		
+		ai_chance = {
+			base = 100
+
+			ai_boldness_target_modifier = { VALUE = 50 }
+		}
+	}
+
+	#Don't risk it
+	option = {
+		name = cannibal.1002.b
+
+		ai_chance = {
+			base = 0
+
+			ai_boldness_target_modifier = { VALUE = -100 }
+
+			modifier = {
+				exists = liege
+				OR = {
+					trait_is_criminal_in_faith_trigger = { TRAIT = cannibal FAITH = liege.faith GENDER_CHARACTER = root }
+				}
+				add = 100
+			}
+		}
+	}
+}
+
+
+#Do I want to become a cannibal?
+cannibal.1003 = {
+	type = character_event
+	title = cannibal.1003.t
+	desc = cannibal.1003.desc
+	theme = witchcraft
+	override_background = {
+		event_background = study
+	}
+	left_portrait = {
+		character = scope:guardian
+		animation = personality_dishonorable
+	}
+
+
+
+	#Yes
+	option = {
+		name = cannibal.1003.a
+		
+		child_cannibal_conversion_success_effect = yes
+	}
+
+	#No...
+	option = {
+		name = cannibal.1003.b
+
+		child_cannibal_conversion_failure_effect = yes
+	}
+	
+	#I will tell someone!
+	option = {
+		trigger = {
+			cannibal_1002_allow_reveal_outcome_trigger = yes
+		}
+		name = cannibal.1003.c
+
+		child_cannibal_conversion_critical_failure_effect = yes
+	}
+}
+
+
+
+##############################################
+#####CONVERT TO CANNIBALISM SCHEME EVENTS#####
+##############################################
+
+#Do I want to go ahead with this?
+cannibal.2001 = {
+	type = character_event
+	title = cannibal.2001.t
+	desc = {
+		desc = cannibal.2001.start.desc
+		first_valid = {
+			triggered_desc = {
+				trigger = { trait_is_shunned_or_criminal_in_my_or_lieges_faith_trigger = { TRAIT = cannibal GENDER_CHARACTER = root } }
+				desc = cannibal.2001.secrecy.desc
+			}
+			desc = cannibal.2001.no_secrecy.desc
+		}
+		desc = cannibal.2001.end.desc
+	}
+	theme = witchcraft
+	override_background = {
+		event_background = sitting_room
+	}
+	left_portrait = scope:target
+	
+	#Yes
+		option = {
+		name = cannibal.2001.a
+		custom_tooltip = cannibal.2001.a.tt
+
+		if = {
+			limit = { scope:target = { is_ai = no } }
+			scope:target = {
+				trigger_event = {
+					id = cannibal.2002
+					days = 3
+				}
+			}
+		}
+		else_if = {
+			limit = { exists = scope:scheme_successful }
+			trigger_event = {
+				id = cannibal.2003
+				days = 3
+			}
+		}
+		else = {
+			trigger_event = {
+				on_action = convert_to_cannibalism_failure_outcome
+				days = 3
+			}
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	#No
+	option = {
+		name = {
+			trigger = { use_convert_to_cannibalism_secrecy_trigger = yes }
+			text = cannibal.2001.b1
+		}
+		name = {
+			trigger = { use_convert_to_cannibalism_secrecy_trigger = yes }
+			text = cannibal.2001.b2
+		}
+		scope:scheme = {
+			end_scheme = yes
+		}
+
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+#Someone is trying to convert me to become a cannibal (player only)
+cannibal.2002 = {
+	type = character_event
+	title = cannibal.2002.t
+	desc = {
+		desc = cannibal.2002.start.desc
+		first_valid = {
+			triggered_desc = {
+				trigger = { exists = scope:scheme_discovered }
+				desc = cannibal.2002.discovery.desc
+			}
+			desc = cannibal.2002.no_discovery.desc
+		}
+		desc = cannibal.2002.end.desc
+	}
+	theme = witchcraft
+	override_background = {
+		event_background = sitting_room
+	}
+	left_portrait = {
+		character = scope:left_portrait
+		triggered_animation = {
+			trigger = { scope:left_portrait = root }
+			animation = disbelief
+		}
+		animation = personality_dishonorable
+	}
+	
+	immediate = {
+		if = {
+			limit = { exists = scope:scheme_discovered }
+			scope:owner = {
+				save_scope_as = left_portrait
+				show_as_tooltip = {
+					random_secret = {
+						limit = {
+							secret_type = secret_cannibal
+							NOT = { is_known_by = root }
+						}
+						reveal_to = root
+					}
+				}
+			}
+		}
+		else = {
+			save_scope_as = left_portrait
+		}
+	}
+
+	#Yes I want to be a cannibal
+	option = {
+		name = cannibal.2002.a
+
+		show_as_tooltip = {
+			give_cannibal_secret_or_trait_effect = yes
+		}
+
+		if = {
+			limit = {
+				faith = {
+					NOT = { has_doctrine = tenet_ritual_cannibalism }
+				}
+			}
+			add_piety = medium_piety_loss
+		}
+		
+		scope:owner = {
+			trigger_event = cannibal.2003
+		}
+
+		stress_impact = {
+			zealous = massive_stress_impact_gain
+			craven = medium_stress_impact_gain
+			gluttonous = medium_stress_impact_loss
+		}
+	}
+
+	#No I don't want to be a cannibal
+	option = {
+		name = cannibal.2002.b
+
+		if = {
+			limit = {
+				faith = {
+					NOT = { has_doctrine = tenet_ritual_cannibalism }
+				}
+			}
+			add_piety = medium_piety_gain
+		}
+
+		scope:owner = {
+			trigger_event = cannibal.2004
+		}
+
+		if = {
+			limit = { exists = scope:scheme_discovered }
+			reverse_add_opinion = {
+				target = scope:owner
+				modifier = disappointed_opinion
+				opinion = -15
+			}
+		}
+
+		stress_impact = {
+			gluttonous = medium_stress_impact_gain
+			ambitious = minor_stress_impact_gain
+		}
+	}
+	
+	#Reveal them to the world!
+	option = {
+		trigger = { exists = scope:scheme_discovered }
+		name = cannibal.2002.c
+
+		if = {
+			limit = {
+				faith = {
+					NOT = { has_doctrine = tenet_ritual_cannibalism }
+				}
+			}
+			add_piety = medium_piety_gain
+		}
+
+		reverse_add_opinion = {
+			target = scope:owner
+			modifier = hate_opinion
+			opinion = -30
+		}
+
+		scope:owner = {
+			trigger_event = cannibal.2005
+		}
+
+		stress_impact = {
+			craven = medium_stress_impact_gain
+			gluttonous = medium_stress_impact_gain
+			compassionate = minor_stress_impact_gain
+			trusting = minor_stress_impact_gain
+		}
+	}
+}	
+
+#SUCCESS EVENTS
+scripted_trigger cannibal_2003_can_learn_owner_secret = {
+	save_temporary_scope_as = secret_learner
+	scope:owner = {
+		any_secret = {
+			secret_type = secret_cannibal
+			NOT = { is_known_by = scope:secret_learner }
+		}
+	}
+}
+
+scripted_trigger cannibal_2003_unlock_reveal_trigger = {
+	NOT = { exists = scope:scheme_discovered }
+	scope:target = { cannibal_2003_can_learn_owner_secret = yes }
+}
+
+
+cannibal.2003 = {
+	type = character_event
+	title = cannibal.2003.t
+	desc = cannibal.2003.desc
+	theme = witchcraft
+	override_background = {
+		event_background = sitting_room
+	}
+	left_portrait = {
+		character = scope:target
+		animation = personality_rational
+	}
+	immediate = {
+		scope:target = {
+			give_cannibal_secret_or_trait_effect = yes
+			random_secret = {
+				limit = { secret_type = secret_cannibal }
+				reveal_to = root
+			}
+		}
+		if = {
+			limit = { exists = scope:scheme_discovered }
+			random_secret = {
+				limit = {
+					secret_type = secret_cannibal
+					NOT = { is_known_by = scope:target }
+				}
+				reveal_to = scope:target
+			}
+
+			reverse_add_opinion = {
+				target = scope:target
+				modifier = grateful_opinion
+				opinion = 20
+			}
+		}
+	}
+
+	#Great!
+	option = {
+		trigger = { cannibal_2003_unlock_reveal_trigger = no }
+		name = cannibal.2003.a
+
+		scope:scheme = {
+			end_scheme = yes
+		}
+	}
+	
+	#Let them know who I am
+	option = {
+		trigger = { cannibal_2003_unlock_reveal_trigger = yes }
+		name = cannibal.2003.b
+
+		scope:target = {
+			send_interface_message = {
+				type = event_generic_good
+				title = cannibal.2003.message
+				left_icon = scope:owner
+				scope:owner = {
+					random_secret = {
+						limit = {
+							secret_type = secret_cannibal
+							NOT = { is_known_by = scope:target }
+						}
+						reveal_to = scope:target
+					}
+				}
+			}
+		}
+
+		reverse_add_opinion = {
+			target = scope:target
+			modifier = grateful_opinion
+			opinion = 20
+		}
+
+		scope:scheme = {
+			end_scheme = yes
+		}
+
+		ai_chance = {
+			base = 100
+
+			modifier = {
+				has_trait = honest
+				add = 50
+			}
+			modifier = {
+				has_trait = trusting
+				add = 100
+			}
+		}
+	}
+
+	#Keep my secret
+	option = {
+		trigger = { cannibal_2003_unlock_reveal_trigger = yes }
+		name = cannibal.2003.c
+
+		scope:scheme = {
+			end_scheme = yes
+		}
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_trait = paranoid
+				add = 100
+			}
+			modifier = {
+				has_trait = craven
+				add = 50
+			}
+			modifier = {
+				has_trait = deceitful
+				add = 50
+			}
+		}
+	}
+
+	after = {
+		#Handle discover
+		if = {
+			limit = {
+				exists = scope:scheme_discovered
+				scope:target = {
+					is_ai = yes
+					OR = {
+						AND = {
+							is_ruler = no
+							exists = liege
+							liege = {
+								cannibal_2003_can_learn_owner_secret = yes
+								NOT = { this = scope:owner }
+							}
+						}
+						any_relation = { type = lover cannibal_2003_can_learn_owner_secret = yes }
+						any_consort = { cannibal_2003_can_learn_owner_secret = yes }
+						any_child = {
+							age >= 7
+							cannibal_2003_can_learn_owner_secret = yes
+						}
+					}
+				}
+			}
+			scope:target = { liege = { trigger_event = cannibal.2010 } }
+		}
+	}
+}
+
+#Success, but discovered
+cannibal.2010 = {
+	type = character_event
+	title = cannibal.2010.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					any_secret = {
+						secret_type = secret_cannibal
+						is_known_by = scope:target
+					}
+				}
+				desc = cannibal.talk.2010
+			}
+			desc = cannibal.leave.2010
+		}
+		desc = cannibal.end.2010
+	}
+	theme = witchcraft
+	override_background = {
+		event_background = sitting_room
+	}
+	left_portrait = {
+		character = scope:target
+		animation = personality_rational
+	}
+	
+	immediate = {
+		hidden_effect = {
+			scope:target = {
+				random_list = {
+					3 = {
+						trigger = {
+							is_ruler = no
+							exists = liege
+							liege = {
+								cannibal_2003_can_learn_owner_secret = yes
+								NOT = { this = scope:owner }
+							}
+						}
+						liege = { save_scope_as = listener }
+					}
+					5 = {
+						trigger = {
+							any_relation = { type = lover cannibal_2003_can_learn_owner_secret = yes }
+						}
+						random_relation = {
+							type = lover
+							limit = { cannibal_2003_can_learn_owner_secret = yes }
+							save_scope_as = listener
+						}
+					}
+					5 = {
+						trigger = {
+							any_consort = { cannibal_2003_can_learn_owner_secret = yes }
+						}
+						random_consort = {
+							limit = { cannibal_2003_can_learn_owner_secret = yes }
+							save_scope_as = listener
+						}
+					}
+					1 = {
+						trigger = {
+							any_child = {
+								age >= 7
+								cannibal_2003_can_learn_owner_secret = yes
+							}
+						}
+						random_child = {
+							limit = {
+								age >= 7
+								cannibal_2003_can_learn_owner_secret = yes
+							}
+							save_scope_as = listener
+						}
+					}
+				}
+			}
+			random_secret = {
+				limit = { secret_type = secret_cannibal }
+				reveal_to = scope:listener
+			}
+		}
+	}
+
+	option = {
+		name = cannibal.2010.a
+		custom_tooltip = cannibal.2010.a.tt
+	}
+}
+
+
+#FAILURE EVENTS
+
+#They refuse
+cannibal.2004 = {
+	type = character_event
+	title = cannibal.2004.t
+	desc = {
+		desc = cannibal.2004.start.desc
+		first_valid = {
+			triggered_desc = {
+				trigger = { exists = scope:scheme_discovered }
+				desc = cannibal.2004.discovered.desc
+			}
+			desc = cannibal.2004.not_discovered.desc
+		}
+	}
+	theme = witchcraft
+	override_background = {
+		event_background = sitting_room
+	}
+	left_portrait = {
+		character = scope:target
+		animation = angry
+	}
+
+	immediate = {
+		if = {
+			limit = { exists = scope:scheme_discovered }
+			random_secret = {
+				limit = {
+					secret_type = secret_cannibal
+					NOT = { is_known_by = scope:target }
+				}
+				reveal_to = scope:target
+			}
+			reverse_add_opinion = {
+				target = scope:target
+				modifier = impious_opinion
+				opinion = -20
+			}
+		}
+		scope:target = {
+			add_character_flag = {	
+				flag = block_convert_to_cannibalism
+				days = 7300
+			}
+		}
+	}
+	
+	option = {
+		name = cannibal.2004.a
+
+		scope:scheme = {
+			end_scheme = yes
+		}
+	}
+}
+
+#They tell their liege
+cannibal.2005 = {
+	type = character_event
+	title = cannibal.2004.t
+	desc = {
+		desc = cannibal.2004.start.desc
+		desc = cannibal.2005.end.desc
+	}
+	theme = witchcraft
+	override_background = {
+		event_background = sitting_room
+	}
+	left_portrait = {
+		character = scope:target
+		animation = angry
+	}
+	trigger = {
+		scope:target = {
+			exists = liege
+			is_ruler = no
+			liege = { NOT = { this = scope:owner } }
+		}
+		exists = scope:scheme_discovered
+	}
+
+	weight_multiplier = {
+		base = 1
+
+		ai_value_modifier = {
+			who = scope:target
+			ai_zeal = 0.05
+			max = 2
+			min = -0.5
+		}
+		opinion_modifier = {
+			who = scope:target
+			opinion_target = root
+			multiplier = -0.05
+			max = 2
+			min = -0.5
+		}
+	}
+
+
+	immediate = {
+		random_secret = {
+			limit = {
+				secret_type = secret_cannibal
+			}
+			if = {
+				limit = { NOT = { is_known_by = scope:target } }
+				reveal_to = scope:target
+			}
+			if = {
+				limit = { NOT = { is_known_by = scope:target.liege } }
+				reveal_to = scope:target.liege
+			}
+		}
+		scope:target = {
+			add_character_flag = {	
+				flag = block_convert_to_cannibalism
+				days = 7300
+			}
+		}
+		reverse_add_opinion = {
+			target = scope:target
+			modifier = impious_opinion
+			opinion = -20
+		}
+	}
+	
+	option = {
+		name = cannibal.2005.a
+		flavor = cannibal.2005.a.tt
+
+		scope:scheme = {
+			end_scheme = yes
+		}
+	}
+}
+
+
+#Target was already a cannibal! Expose your secrets to each other - for owner
+cannibal.2006 = {
+	type = character_event
+	title = cannibal.2006.t
+	desc = cannibal.2006.desc
+	theme = witchcraft
+	override_background = {
+		event_background = sitting_room
+	}
+	left_portrait = {
+		character = scope:target
+		animation = shock
+	}
+
+	trigger = { #Make sure the secrets are still unknown and that target is alive and kicking
+		scope:target = {
+			is_alive = yes
+			any_secret = {
+				secret_type = secret_cannibal
+				NOT = {  any_secret_knower = { this = root } }
+			}
+		}
+	}
+
+	immediate = {
+		scope:target = {
+			random_secret = {
+				limit = { secret_type = secret_cannibal }
+				reveal_to = root
+			}
+			trigger_event = cannibal.2007
+		}
+		random_secret = {
+			limit = { secret_type = secret_cannibal }
+			reveal_to = scope:target
+		}
+		reverse_add_opinion = {
+			target = scope:target
+			modifier = respect_opinion
+			opinion = 20
+		}
+	}
+
+	#Great!
+	option = {
+		name = cannibal.2006.a
+	}
+
+	after = {
+		scope:scheme = {
+			end_scheme = yes
+		}
+	}
+}
+
+#Target was already a cannibal! Expose your secrets to each other - for target
+cannibal.2007 = {
+	type = character_event
+	title = cannibal.2007.t
+	desc = cannibal.2007.desc
+	theme = witchcraft
+	override_background = {
+		event_background = sitting_room
+	}
+	left_portrait = {
+		character = scope:owner
+		animation = shock
+	}
+
+	trigger = { #Make sure the secrets are still unknown and that target is alive and kicking
+		scope:owner = {
+			is_alive = yes
+			is_cannibal_trigger = yes
+		}
+	}
+
+	immediate = {
+		show_as_tooltip = {
+			scope:owner = {
+				random_secret = {
+					limit = { secret_type = secret_cannibal }
+					reveal_to = root
+				}
+			}
+			random_secret = {
+				limit = { secret_type = secret_cannibal }
+				reveal_to = scope:owner
+			}
+		}
+		reverse_add_opinion = {
+			target = scope:owner
+			modifier = respect_opinion
+			opinion = 20
+		}
+	}
+
+	#Great!
+	option = {
+		name = cannibal.2007.a
+	}
+}
+
+###############################
+# REVEAL AS CANNIBAL INTERACTION #
+###############################
+
+cannibal.2900 = {
+	type = letter_event
+	opening = cannibal.2900.t
+	desc = cannibal.2900.desc
+	sender = scope:actor
+
+	immediate = {
+		scope:cannibal_secret = { reveal_to = root }
+		hidden_effect = {
+			if = {
+				limit = { can_set_relation_potential_friend_trigger = { CHARACTER = scope:actor } }
+				set_relation_potential_friend = scope:actor
+			}
+		}
+	}
+
+	option = {
+		name = cannibal.2900.a
+		scope:actor = {
+			trigger_event = {
+				id = cannibal.2901
+				days = 3
+			}
+		}
+	}
+}
+
+cannibal.2901 = {
+	type = letter_event
+	opening = cannibal.2901.t
+	desc = cannibal.2901.desc
+	sender = scope:recipient
+
+	option = {
+		name = cannibal.2901.a
+	}
+}

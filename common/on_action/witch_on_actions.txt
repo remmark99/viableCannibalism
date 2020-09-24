@@ -1,0 +1,13 @@
+####################################################################
+# CONVERT TO CANNIBALISM ON_ACTIONS
+####################################################################
+
+#Success is just one event
+
+convert_to_cannibalism_failure_outcome = {
+	random_events = {
+		4 = cannibal.2004
+		1 = cannibal.2005
+	}
+}
+

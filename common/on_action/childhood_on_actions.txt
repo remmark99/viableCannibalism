@@ -1,0 +1,8 @@
+on_15th_birthday = {
+	trigger = { age = 15 }
+
+	events = {
+		witch.1001
+		cannibal.1001
+	}
+}

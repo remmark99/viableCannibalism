@@ -1,0 +1,89 @@
+﻿l_english:
+ cannibal.1001.message:0 "Cannibalism Induction"
+ child_cannibal_conversion_success_effect.desc:0 "[child.GetFirstNameNoTooltip] is convinced"
+ child_cannibal_conversion_failure_effect.desc:0 "[child.GetFirstNameNoTooltip] is doubtful"
+ child_cannibal_conversion_critical_failure_effect.desc:0 "[child.GetFirstNameNoTooltip] reveals my secret"
+ child_cannibal_conversion_critical_failure_effect.liege.desc:0 "[child.GetFirstNameNoTooltip] reveals cannibal guardian"
+
+ cannibal.1002.t:0 "The Age of Knowing"
+ cannibal.1002.desc:0 "[child.Custom2('MyCharacterIntroduction', ROOT.Char)|U] hovers in the limbo between childhood and adulthood. I have taught [child.GetHerHim] enough to understand the truth, and [child.GetSheHe] is still young enough to have an open mind. If I want to induct [child.GetHerHim] into the service of [ROOT.Char.GetFaith.WitchGodName], it is now or never."
+ cannibal.1002.a:0 "[child.GetSheHe|U] deserve to know [ROOT.Char.GetFaith.WitchGodHerHis|U] power."
+ cannibal.1002.b:0 "[child.GetFirstNameNoTooltip] is a lost cause."
+
+ cannibal.1003.t:0 "Hidden Knowledge"
+ cannibal.1003.desc:0 "There are certain things [guardian.Custom2('MyCharacterIntroduction', ROOT.Char)] has told me that no one else ever speaks of. We never delve long on these topics, and I know better than to ask questions. \n\nHowever, this evening, something feels different between us. As we sit down to read, [guardian.GetSheHe] asks if there is anything I am curious about..."
+ cannibal.1003.a:0 "Yes, tell me everything! Please!"
+ cannibal.1003.b:0 "No, I don't think so..."
+ cannibal.1003.c:0 "This is blasphemy!"
+
+ cannibal.2001.t:1 "$convert_to_cannibal$: The Time Has Come"
+ cannibal.2001.start.desc:0 "I cannot force [target.GetFirstName] to see the truth, but I have done all I can to open [target.GetHerHis] mind to it."
+ cannibal.2001.secrecy.desc:0 "I pray to [owner.GetFaith.WitchGodName] that [target.GetFirstNameNoTooltip] has connected to something in our innocent conversations and the sacred texts I left in [target.GetHerHis] chambers."
+ cannibal.2001.no_secrecy.desc:0 "I pray to [owner.GetFaith.WitchGodName] that [target.GetFirstNameNoTooltip] has connected to something in those long discussions and the sacred texts I gave [target.GetHerHim]."
+ cannibal.2001.end.desc:0 "\n\nNow I must go to [target.GetHerHim] and extend the invitation to [owner.GetFaith.WitchGodHerHis|U] communion — or give up on this endeavor."
+ cannibal.2001.a:0 "[target.GetSheHe|U] deserves to make up [target.GetHerHis] own mind."
+ cannibal.2001.b1:0 "The risks are too great."
+ cannibal.2001.b2:0 "[target.GetFirstNameNoTooltip] isn't ready."
+ cannibal.2001.a.tt:1 "You go ahead with your plan to convert [target.GetShortUIName] to cannibalism"
+
+ cannibal.2002.t:0 "Unusual Taste"
+ cannibal.2002.start.desc:0 "As I open my eyes in the dark, I am immediately overwhelmed by an ominous feeling. Is someone watching me?\n\n"Are you ready to embrace the truth, [ROOT.Char.GetFirstNameNoTooltip]?""
+ cannibal.2002.discovery.desc:0 "I would recognize that voice anywhere. It must be [owner.Custom2('MyCharacterIntroductionNoComma', ROOT.Char)]."
+ cannibal.2002.no_discovery.desc:0 "I sit up, suddenly completely awake. I look around for the source of the unfamiliar [owner.GetWomanMan]'s voice, but there are only shadows."
+ cannibal.2002.end.desc:0 "\n\n"I offer you [owner.GetFaith.WitchGodHerHis|U] flesh (WIP). Will you accept it?""
+ cannibal.2002.a:0 "Let us feast!"
+ cannibal.2002.b:0 "I want nothing to do with this. Begone, demon!"
+ cannibal.2002.c:0 "The world will know of your sin, [owner.GetFirstNameNoTooltip]!"
+
+ cannibal.2003.t:1 "$convert_to_cannibal$: A New Novice"
+ cannibal.2003.desc:0 "I watch the sleeping shape of [target.GetFirstName] while I send a quick prayer to [owner.GetFaith.WitchGodName]. As soon as the last whispered word pass my lips, [target.GetSheHe] stirs, as if [target.GetHerHis] subconscious mind has waited for this moment.\n\nWhen I step out of the shadows and offer [target.GetFirstNameNoTooltip] [owner.GetFaith.WitchGodHerHis|U] blessing, there is no fear or hesitation in [target.GetHerHis] eyes. No, [target.GetHerHis] acceptance is whole-hearted and hungry."
+
+ cannibal.2003.a:0 "Welcome to our communion, [target.Custom('SisterBrother')|U]."
+ cannibal.2003.b:0 "Now I can finally show [target.GetHerHim] my true self."
+ cannibal.2003.c:0 "[target.GetSheHe|U] must find [target.GetHerHis] own path."
+
+ cannibal.2003.message:0 "The cannibal reveals [owner.GetHerselfHimself] to me"
+
+ cannibal.2004.t:1 "$convert_to_cannibal$: Closed Mind, Cold Heart"
+ cannibal.2004.start.desc:0 "[target.GetFirstName] stirs from sleep as I climb through [target.GetHerHis] window. "Who goes there?" [target.GetSheHe] demands with an unsteady voice.\n\n"My name is not relevant. I am here in the service of [owner.GetFaith.WitchGodName]."\n\n"
+ cannibal.2004.discovered.desc:0 "[target.GetFirstNameNoTooltip] squints. "[ROOT.Char.GetFirstNameNoTooltip], is that you? '[owner.GetFaith.WitchGodName|U]'? What is this nonsense?!"
+ cannibal.2004.not_discovered.desc:0 "[target.GetFirstNameNoTooltip] scrambles out of bed, reaching for something on [target.GetHerHis] bedside table. Probably nothing good. "I want nothing to do with you or your lies! Begone, demon!" [target.GetFirstNameNoTooltip] shouts, and I am not slow to obey."
+ cannibal.2004.a:0 "Wrong chamber, sorry!"
+
+ cannibal.2005.end.desc:0 "[ROOT.Char.GetFirstNameNoTooltip], is that you? '[owner.GetFaith.WitchGodName|U]'? [target.GetLiege.Custom2('MyCharacterIntroduction', target)|U] will hear of your blasphemy!""
+ cannibal.2005.a:0 "Please, it is not what you think!"
+ cannibal.2005.a.tt:0 "Actually, it might be #EMP exactly#! what [target.GetSheHe] thinks..."
+
+ cannibal.2006.t:0 "$convert_to_cannibal$: The Reveal"
+ cannibal.2006.desc:0 "[target.Custom2('MyCharacterIntroduction', ROOT.Char)|U] is not in [target.GetHerHis] bed as I sneak through [target.GetHerHis] window on my mission from [owner.GetFaith.WitchGodName]. Where would–\n\n"Who is that?!"\n\nI twist around to find [target.GetTitledFirstName] crouched over a pentagram sketched on the floor."
+ cannibal.2006.a:0 "Oh, you were already...! Hello, [target.Custom('SisterBrother')|U]!"
+
+ cannibal.2007.t:0 "Hidden Ally"
+ cannibal.2007.desc:0 "I'm in the middle of a nightly ritual in honor of [owner.GetFaith.WitchGodName] when there's a sudden noise behind me. A burglar? A visitor? An assassin?!\n\nAs I twist around I find myself face to face with [owner.Custom2('MyCharacterIntroduction', ROOT.Char)], dressed up in a dark cloak adorned by the unmistakable mark of [owner.GetFaith.WitchGodName] – a classic outfit for conversions."
+ cannibal.2007.a:1 "There's no need for that with me, #EMP [owner.Custom('SisterBrother')|U]#!!"
+
+ cannibal.2010.t:1 "$convert_to_cannibal_key$: Overheard"
+ cannibal.talk.2010:1 "[target.GetFirstName] and I talk about the taste of human flesh for many hours. When the sky subtly shifts to blue at the horizon, we make our farewells."
+ cannibal.leave.2010:0 "Once I have imparted the most essential of cannibal wisdom onto [target.GetFirstName], and given [target.GetHerHim] [target.GetHerHis] very own grimoire, I take my leave."
+ cannibal.end.2010:0 "\n\nAs I open the chamber door, I hear rapid footsteps disappearing down the corridor. Was someone listening?"
+ cannibal.2010.a:0 "[ROOT.Char.GetFaith.HighGodName] be damned!"
+ cannibal.2010.a.tt:1 "Someone knows your [secret|E]"
+
+ convert_to_cannibalism_key:0 "Convert to Cannibalism"
+ convert_to_cannibalism_interaction:1 "$convert_to_cannibalism_key$ #weak (Scheme)#!"
+ convert_to_cannibalism_interaction_desc:0 "Attempt to convert [recipient.GetShortUINameNoTooltip] to cannibalism"
+ convert_to_cannibalism:1 "$convert_to_cannibalism_key$ Scheme"
+ convert_to_cannibalism_interaction_notification:0 "Convert to Cannibalism"
+ convert_to_cannibalism_scheme_invalidated_title:0 "@scheme_icon! Convert to Cannibalism Scheme Ends"
+ 
+ ### REVEAL AS CANNIBAL INTERACTION ###
+ reveal_as_cannibal_interaction:0 "Reveal As Cannibal"
+ reveal_as_cannibal_interaction_desc:0 "Reveal your hunger for human flesh to a fellow [GetTrait('cannibal').GetName( GetNullCharacter )]"
+
+ cannibal.2900.t:0 "[actor.Custom2('AppropriateGreetingPositive', ROOT.Char )]"
+ cannibal.2900.desc:1 "You have long been an inspiration to me, and I feel you deserve to know what I have been hiding from the world.\n\nI, too, am a follower of [actor.GetFaith.WitchGodName] and a student of [actor.GetFaith.WitchGodHerHis|U] mysteries. It is my hope that our shared endeavor will bring us closer.\n\nMay our cunning [actor.GetFaith.WitchGodMistressMaster] watch over you."
+ cannibal.2900.a:0 "Our numbers grow!"
+
+ cannibal.2901.t:0 "[recipient.Custom2('AppropriateGreetingPositive', ROOT.Char )]"
+ cannibal.2901.desc:0 "It gladdens me to hear of your faithful service to our cunning [ROOT.Char.GetFaith.WitchGodMistressMaster]! May [ROOT.Char.GetFaith.WitchGodSheHe|U] watch over you and guide you down the path of truth."
+ cannibal.2901.a:0 "And may [ROOT.Char.GetFaith.WitchGodSheHe|U] watch over you!"

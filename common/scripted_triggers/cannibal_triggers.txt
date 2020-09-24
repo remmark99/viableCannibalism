@@ -1,0 +1,17 @@
+use_convert_to_cannibalism_secrecy_trigger = {
+	scope:owner = {
+		any_secret = { secret_type = secret_cannibal }
+		save_temporary_scope_as = cannibalism_secrecy_check
+		trait_is_shunned_or_criminal_in_my_or_lieges_faith_trigger = { TRAIT = cannibal GENDER_CHARACTER = scope:cannibalism_secrecy_check }
+	}
+}
+
+knows_about_character_being_cannibal_trigger = {
+	OR = {
+		$CHARACTER$ = { has_trait = cannibal }
+		any_known_secret = {
+			secret_owner = $CHARACTER$
+			secret_type = secret_cannibal
+		}
+	}
+}

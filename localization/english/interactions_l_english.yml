@@ -1,0 +1,5 @@
+﻿l_english:
+ CHARCTER_HAS_A_CANNIBAL_SECRET_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
+ CHARCTER_HAS_A_CANNIBAL_SECRET_NOT_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
+ HAS_A_Cannibal_SECRET_KNOWN_BY_CHARACTER:0 "Has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
+ convert_to_cannibal:0 "Convert to Cannibalism"
