@@ -7,6 +7,7 @@ namespace = cannibal
 #cannibal.1001-1999 - Guardian coverts ward
 #cannibal.2001-2899 - Convert to cannibalism scheme
 #cannibal.2900-2999 - Reveal as cannibal interaction
+#cannibal.3001-3999 - Become cannibal
 #
 
 ##########################
@@ -1029,5 +1030,108 @@ cannibal.2901 = {
 
 	option = {
 		name = cannibal.2901.a
+	}
+}
+
+#########################
+# BECOME CANIBAL EVENTS #
+#########################
+
+# Basically stolen HL.1500 event from CK2
+cannibal.3001 = {
+	type = character_event
+	title = cannibal.3001.t
+	desc = cannibal.3001.desc
+	theme = mental_health
+	left_portrait = {
+		character = root
+		animation = paranoia
+	}
+
+	trigger = {
+		has_trait = lunatic
+		is_cannibal_trigger = no
+		is_ai = no
+		NOT = { has_character_flag = wolf_resisted_cannibalism }
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			has_trait = cruel
+			factor = 1.5
+		}
+
+		modifier = {
+			has_trait = possessed
+			factor = 1.5
+		}
+
+		modifier = {
+			has_trait = gluttonous
+			factor = 1.5
+		}
+
+		modifier = {
+			OR = {
+				has_trait = hunter_1
+				has_trait = hunter_2
+				has_trait = hunter_3
+			}
+			factor = 1.5
+		}
+
+		modifier = {
+			has_trait = temperate
+			factor = 0.5
+		}
+
+		modifier = {
+			has_trait = kind
+			factor = 0.5
+		}
+
+		# Why would this influence it?
+		modifier = {
+			has_trait = charitable
+			factor = 0.5
+		}
+	}
+
+	# Eat someone
+	option = {
+		name = cannibal.3001.eat
+		random_courtier = {
+			limit = {
+				is_adult = yes
+				is_ai = yes
+				NOR = {
+					is_mother_of_compare_character_trigger = yes
+					is_father_of_compare_character_trigger = yes
+				}
+			}
+
+			death = {
+				death_reason = death_murder
+				killer = root
+			}
+		}
+		
+		root = {
+			give_cannibal_secret_or_trait_effect = yes
+		}
+
+		# TODO: Add stress and possibly piety loss
+	}
+
+	option = {
+		name = cannibal.3001.resist
+
+		# TODO: change amount of stress based on traits
+		add_stress = massive_stress_impact_gain
+
+		add_character_flag = {
+			flag = wolf_resisted_cannibalism
+		}
 	}
 }

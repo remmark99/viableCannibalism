@@ -19,3 +19,9 @@ on_14th_birthday = {
 		cannibal.1001
 	}
 }
+
+on_yearly_events = {
+	random_events = {
+		300 = cannibal.3001
+	}
+}
