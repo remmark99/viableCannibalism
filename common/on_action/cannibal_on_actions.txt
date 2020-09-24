@@ -11,3 +11,11 @@ convert_to_cannibalism_failure_outcome = {
 	}
 }
 
+#Event to turn child into cannibal
+on_14th_birthday = {
+	trigger = { age = 14 }
+
+	events = {
+		cannibal.1001
+	}
+}

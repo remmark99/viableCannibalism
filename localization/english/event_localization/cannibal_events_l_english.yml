@@ -72,7 +72,10 @@
  convert_to_cannibalism_key:0 "Convert to Cannibalism"
  convert_to_cannibalism_interaction:1 "$convert_to_cannibalism_key$ #weak (Scheme)#!"
  convert_to_cannibalism_interaction_desc:0 "Attempt to convert [recipient.GetShortUINameNoTooltip] to cannibalism"
+
  convert_to_cannibalism:1 "$convert_to_cannibalism_key$ Scheme"
+ convert_to_cannibalism_desc:0 "I will lead [SCHEME.GetTarget.GetShortUINameNoTooltip] down the path of [SCHEME.GetOwner.GetFaith.WitchGodName] and show [SCHEME.GetTarget.GetHerHim] the true extent of [SCHEME.GetOwner.GetFaith.WitchGodHerHis|U] power."
+ convert_to_cannibalism_action:0 "Convert"
  convert_to_cannibalism_interaction_notification:0 "Convert to Cannibalism"
  convert_to_cannibalism_scheme_invalidated_title:0 "@scheme_icon! Convert to Cannibalism Scheme Ends"
  
@@ -87,3 +90,14 @@
  cannibal.2901.t:0 "[recipient.Custom2('AppropriateGreetingPositive', ROOT.Char )]"
  cannibal.2901.desc:0 "It gladdens me to hear of your faithful service to our cunning [ROOT.Char.GetFaith.WitchGodMistressMaster]! May [ROOT.Char.GetFaith.WitchGodSheHe|U] watch over you and guide you down the path of truth."
  cannibal.2901.a:0 "And may [ROOT.Char.GetFaith.WitchGodSheHe|U] watch over you!"
+
+ CHARCTER_HAS_A_CANNIBAL_SECRET_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
+ CHARCTER_HAS_A_CANNIBAL_SECRET_NOT_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
+ HAS_A_Cannibal_SECRET_KNOWN_BY_CHARACTER:0 "Has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
+ convert_to_cannibal:0 "Convert to Cannibalism"
+
+ CONVERT_TO_CANNIBALISM_SUCCESS_DESC:0 "[TARGET_CHARACTER.GetShortUIName|U] becomes a Cannibal"
+
+ SCHEME_I_AM_NOT_CANNIBAL:1 "You are not a cannibal: $VALUE|0=-+$"
+ SCHEME_I_AM_CANNIBAL:1 "You are a cannibal: $VALUE|0=-+$"
+ SCHEME_TRAIT_GLUTTONOUS:0 "[GetTrait('gluttonous').GetName( ROOT.Char )]: $VALUE|+0=$"

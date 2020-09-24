@@ -1,4 +1,0 @@
-﻿l_english:
- SCHEME_I_AM_NOT_CANNIBAL:1 "You are not a cannibal: $VALUE|0=-+$"
- SCHEME_I_AM_CANNIBAL:1 "You are a cannibal: $VALUE|0=-+$"
- SCHEME_TRAIT_GLUTTONOUS:0 "[GetTrait('gluttonous').GetName( ROOT.Char )]: $VALUE|+0=$"
