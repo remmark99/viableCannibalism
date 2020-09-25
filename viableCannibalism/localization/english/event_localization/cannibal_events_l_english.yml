@@ -96,6 +96,10 @@
  cannibal.3001.eat:0 "The wolf is hungry!"
  cannibal.3001.resist:0 "I... must... resist... it..."
 
+ cannibal.4001.t:0 "Manna From Heaven"
+ cannibal.4001.desc:0 "By consuming the very life force of [recipient.GetTitledFirstName], I've also gained a part of [recipient.GetHerHis] personality and strength!"
+ cannibal.4001.devour:0 "Unlimited power!"
+
  CHARCTER_HAS_A_CANNIBAL_SECRET_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
  CHARCTER_HAS_A_CANNIBAL_SECRET_NOT_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
  HAS_A_Cannibal_SECRET_KNOWN_BY_CHARACTER:0 "Has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
@@ -106,3 +110,6 @@
  SCHEME_I_AM_NOT_CANNIBAL:1 "You are not a cannibal: $VALUE|0=-+$"
  SCHEME_I_AM_CANNIBAL:1 "You are a cannibal: $VALUE|0=-+$"
  SCHEME_TRAIT_GLUTTONOUS:0 "[GetTrait('gluttonous').GetName( ROOT.Char )]: $VALUE|+0=$"
+
+ devour_prisoner_interaction:0 "Devour Imprisoned"
+ devour_prisoner_interaction_desc:0 "As [recipient.GetShortUINameNoTooltip] is your prisoner you can do as you please with him. Why not invite him to dinner..."

@@ -297,3 +297,167 @@ reveal_as_cannibal_interaction = {
 		}
 	}
 }
+
+# Currently player only
+devour_prisoner_interaction = {
+	interface_priority = 120
+	is_shown = {
+		scope:actor = {
+			OR = {
+				has_trait = cannibal
+				any_secret = { secret_type = secret_cannibal }
+			}
+			is_adult = yes
+		}
+		scope:recipient = {
+			is_imprisoned_by = scope:actor
+			is_adult = yes
+		}
+	}
+
+	# Should play with that setting to see what it changes
+	common_interaction = yes
+	category = interaction_category_prison
+	special_interaction = devour_prisoner_interaction
+
+	desc = devour_prisoner_interaction_desc
+
+	# Copy pasted from execute
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			custom_description = {
+				text = "currently_being_tortured"
+				NOT = { has_character_flag = is_being_tortured }
+			}
+		}
+	}
+
+	on_accept = {
+		if = {
+			limit = { 
+				scope:recipient = { is_imprisoned_by = scope:actor }
+			}
+			# TODO: Add the same for AI, change text from execution to devouring
+			scope:recipient = { trigger_event = char_interaction.0171 }
+
+			scope:actor = {
+				stress_impact = {
+					base = medium_stress_impact_loss
+					compassionate = minor_stress_impact_gain
+					forgiving = minor_stress_impact_gain
+				}
+
+				# TODO: test if this works
+				if = {
+					limit = {
+						has_nickname = no
+					}
+					random_list = {
+						20 = { # Get nickname The Cannibal
+							give_nickname = nick_the_cannibal
+						}
+						15 = { # Get nickname The Dragon
+							give_nickname = nick_the_dragon
+						}
+						15 = { # Get nickname The Abomination
+							give_nickname = nick_the_abomination
+						}
+						10 = { # Get nickname The Monster
+							give_nickname = nick_the_monster
+						}
+						40 = { } # No nickname
+					}
+				}
+
+				# If I am eating a head of different faith...
+				if = {
+					limit = {
+						scope:recipient.faith.religious_head = scope:recipient
+						NOT = { scope:recipient.faith = scope:actor.faith }
+					}
+					trigger_event = cannibal.4001
+				}
+				# If I am eating anyone else...
+				else = {
+					random_list = {
+						50 = { }
+						20 = { # Become ill
+							show_as_tooltip = { add_trait = ill }
+							hidden_effect = {
+								trigger_event = {
+									id = health.1001
+									days = { 3 10 }
+								}
+							}
+						}
+						10 = { # Get consumption
+							show_as_tooltip = { add_trait = consumption }
+							hidden_effect = {
+								trigger_event = {
+									id = health.1006
+									days = { 3 10 }
+								}
+							}
+						}
+						10 = { # Get pneumonia
+							show_as_tooltip = { add_trait = pneumonic }
+							hidden_effect = {
+								trigger_event = {
+									id = health.1002
+									days = { 3 10 }
+								}
+							}
+						}
+						# 40 = { # Get sick
+						# 	random_list = {
+						# 		50 = { # Ill
+						# 			hidden_effect = {
+						# 				trigger_event = {
+						# 					id = health.1001
+						# 					days = { 3 10 }
+						# 				}
+						# 			}
+						# 		}
+						# 		25 = {
+						# 			hidden_effect = {
+						# 				trigger_event = {
+						# 					id = health.1006
+						# 					days = { 3 10 }
+						# 				}
+						# 			}
+						# 		}
+						# 		25 = {
+						# 			hidden_effect = {
+						# 				trigger_event = {
+						# 					id = health.1002
+						# 					days = { 3 10 }
+						# 				}
+						# 			}
+						# 		}
+						# 	}
+						# }
+						10 = { # Gain power
+							trigger_event = cannibal.4001
+						}
+					}
+				}
+
+				hidden_effect = {
+					send_interface_message = {
+						type = event_generic_neutral
+						title = msg_devour_prisoner
+						right_icon = scope:recipient
+						custom_tooltip = msg_devour_prisoner_desc
+					}
+				}
+			}
+
+			devour_prisoner_effect = {
+				VICTIM = scope:recipient
+				EXECUTIONER = scope:actor
+			}
+		}
+	}
+
+	auto_accept = yes
+}

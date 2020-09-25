@@ -1,0 +1,36 @@
+devoured_guest_modifier = {
+	opinion = -10
+	years = 10
+	decaying = yes
+}
+
+devoured_my_countryman_modifier = {
+	opinion = -50
+	years = 20
+	decaying = yes
+}
+
+devoured_close_family = {
+	opinion = -100
+	years = 30
+	decaying = yes
+}
+
+devoured_close_family_crime = {
+	opinion = -100
+	imprisonment_reason = yes
+	execute_reason = yes
+	banish_reason = yes
+}
+
+devoured_dynasty_member = {
+	opinion = -40
+	years = 20
+	decaying = yes
+}
+
+devoured_close_relation_opinion = {
+	opinion = -60
+	years = 25
+	decaying = yes
+}

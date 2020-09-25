@@ -8,6 +8,7 @@ namespace = cannibal
 #cannibal.2001-2899 - Convert to cannibalism scheme
 #cannibal.2900-2999 - Reveal as cannibal interaction
 #cannibal.3001-3999 - Become cannibal
+#cannibal.4001-4999 - Devour prisoner
 #
 
 ##########################
@@ -1132,6 +1133,579 @@ cannibal.3001 = {
 
 		add_character_flag = {
 			flag = wolf_resisted_cannibalism
+		}
+	}
+}
+
+cannibal.4001 = {
+	type = character_event
+	title = cannibal.4001.t
+	desc = cannibal.4001.desc
+	theme = prison
+
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+	}
+
+	right_portrait = {
+		character = scope:recipient
+		animation = fear
+	}
+
+	option = {
+		name = cannibal.4001.devour
+
+		### Congenital traits
+		# Genius
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = intellect_good_3
+				}
+				NOT = { has_trait = intellect_good_3 }
+			}
+			if = {
+				limit = {
+					has_trait = intellect_bad_3
+				}
+				remove_trait = intellect_bad_3
+			}
+			if = {
+				limit = {
+					has_trait = intellect_bad_2
+				}
+				remove_trait = intellect_bad_2
+			}
+			if = {
+				limit = {
+					has_trait = intellect_bad_1
+				}
+				remove_trait = intellect_bad_1
+			}
+			if = {
+				limit = {
+					has_trait = intellect_good_1
+				}
+				remove_trait = intellect_good_1
+			}
+			if = {
+				limit = {
+					has_trait = intellect_good_2
+				}
+				remove_trait = intellect_good_2
+			}
+			add_trait = intellect_good_3
+		}
+
+		# Intelligent
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = intellect_good_2
+				}
+				NOT = { has_trait = intellect_good_3 }
+				NOT = { has_trait = intellect_good_2 }
+			}
+			if = {
+				limit = {
+					has_trait = intellect_bad_3
+				}
+				remove_trait = intellect_bad_3
+			}
+			if = {
+				limit = {
+					has_trait = intellect_bad_2
+				}
+				remove_trait = intellect_bad_2
+			}
+			if = {
+				limit = {
+					has_trait = intellect_bad_1
+				}
+				remove_trait = intellect_bad_1
+			}
+			if = {
+				limit = {
+					has_trait = intellect_good_1
+				}
+				remove_trait = intellect_good_1
+			}
+			add_trait = intellect_good_2
+		}
+
+		# Quick
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = intellect_good_1
+				}
+				NOT = { has_trait = intellect_good_3 }
+				NOT = { has_trait = intellect_good_2 }
+				NOT = { has_trait = intellect_good_1 }
+			}
+			if = {
+				limit = {
+					has_trait = intellect_bad_3
+				}
+				remove_trait = intellect_bad_3
+			}
+			if = {
+				limit = {
+					has_trait = intellect_bad_2
+				}
+				remove_trait = intellect_bad_2
+			}
+			if = {
+				limit = {
+					has_trait = intellect_bad_1
+				}
+				remove_trait = intellect_bad_1
+			}
+			add_trait = intellect_good_1
+		}
+
+		# Herculean
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = physique_good_3
+				}
+				NOT = { has_trait = physique_good_3 }
+			}
+			if = {
+				limit = {
+					has_trait = physique_bad_3
+				}
+				remove_trait = physique_bad_3
+			}
+			if = {
+				limit = {
+					has_trait = physique_bad_2
+				}
+				remove_trait = physique_bad_2
+			}
+			if = {
+				limit = {
+					has_trait = physique_bad_1
+				}
+				remove_trait = physique_bad_1
+			}
+			if = {
+				limit = {
+					has_trait = physique_good_1
+				}
+				remove_trait = physique_good_1
+			}
+			if = {
+				limit = {
+					has_trait = physique_good_2
+				}
+				remove_trait = physique_good_2
+			}
+			add_trait = physique_good_3
+		}
+
+		# Robust
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = physique_good_2
+				}
+				NOT = { has_trait = physique_good_3 }
+				NOT = { has_trait = physique_good_2 }
+			}
+			if = {
+				limit = {
+					has_trait = physique_bad_3
+				}
+				remove_trait = physique_bad_3
+			}
+			if = {
+				limit = {
+					has_trait = physique_bad_2
+				}
+				remove_trait = physique_bad_2
+			}
+			if = {
+				limit = {
+					has_trait = physique_bad_1
+				}
+				remove_trait = physique_bad_1
+			}
+			if = {
+				limit = {
+					has_trait = physique_good_1
+				}
+				remove_trait = physique_good_1
+			}
+			add_trait = physique_good_2
+		}
+
+		# Hale
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = physique_good_1
+				}
+				NOT = { has_trait = physique_good_3 }
+				NOT = { has_trait = physique_good_2 }
+				NOT = { has_trait = physique_good_1 }
+			}
+			if = {
+				limit = {
+					has_trait = physique_bad_3
+				}
+				remove_trait = physique_bad_3
+			}
+			if = {
+				limit = {
+					has_trait = physique_bad_2
+				}
+				remove_trait = physique_bad_2
+			}
+			if = {
+				limit = {
+					has_trait = physique_bad_1
+				}
+				remove_trait = physique_bad_1
+			}
+			add_trait = physique_good_1
+		}
+
+		### Personality traits
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = compassionate
+				}
+				NOT = { has_trait = compassionate }
+			}
+			add_trait = compassionate
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = wrathful
+				}
+				NOT = { has_trait = wrathful }
+			}
+			add_trait = wrathful
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = forgiving
+				}
+				NOT = { has_trait = forgiving }
+			}
+			add_trait = forgiving
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = calm
+				}
+				NOT = { has_trait = calm }
+			}
+			add_trait = calm
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = fickle
+				}
+				NOT = { has_trait = fickle }
+			}
+			add_trait = fickle
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = chaste
+				}
+				NOT = { has_trait = chaste }
+			}
+			add_trait = chaste
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = lustful
+				}
+				NOT = { has_trait = lustful }
+			}
+			add_trait = lustful
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = temperate
+				}
+				NOT = { has_trait = temperate }
+			}
+			add_trait = temperate
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = gluttonous
+				}
+				NOT = { has_trait = gluttonous }
+			}
+			add_trait = gluttonous
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = generous
+				}
+				NOT = { has_trait = generous }
+			}
+			add_trait = generous
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = greedy
+				}
+				NOT = { has_trait = greedy }
+			}
+			add_trait = greedy
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = diligent
+				}
+				NOT = { has_trait = diligent }
+			}
+			add_trait = diligent
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = lazy
+				}
+				NOT = { has_trait = lazy }
+			}
+			add_trait = lazy
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = patient
+				}
+				NOT = { has_trait = patient }
+			}
+			add_trait = patient
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = gregarious
+				}
+				NOT = { has_trait = gregarious }
+			}
+			add_trait = gregarious
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = kind
+				}
+				NOT = { has_trait = kind }
+			}
+			add_trait = kind
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = impatient
+				}
+				NOT = { has_trait = impatient }
+			}
+			add_trait = impatient
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = humble
+				}
+				NOT = { has_trait = humble }
+			}
+			add_trait = humble
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = callous
+				}
+				NOT = { has_trait = callous }
+			}
+			add_trait = callous
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = deceitful
+				}
+				NOT = { has_trait = deceitful }
+			}
+			add_trait = deceitful
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = honest
+				}
+				NOT = { has_trait = honest }
+			}
+			add_trait = honest
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = craven
+				}
+				NOT = { has_trait = craven }
+			}
+			add_trait = craven
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = brave
+				}
+				NOT = { has_trait = brave }
+			}
+			add_trait = brave
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = shy
+				}
+				NOT = { has_trait = shy }
+			}
+			add_trait = shy
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = gregarious
+				}
+				NOT = { has_trait = gregarious }
+			}
+			add_trait = gregarious
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = ambitious
+				}
+				NOT = { has_trait = ambitious }
+			}
+			add_trait = ambitious
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = content
+				}
+				NOT = { has_trait = content }
+			}
+			add_trait = content
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = arbitrary
+				}
+				NOT = { has_trait = arbitrary }
+			}
+			add_trait = arbitrary
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = just
+				}
+				NOT = { has_trait = just }
+			}
+			add_trait = just
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = cynical
+				}
+				NOT = { has_trait = cynical }
+			}
+			add_trait = cynical
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = zealous
+				}
+				NOT = { has_trait = zealous }
+			}
+			add_trait = zealous
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = paranoid
+				}
+				NOT = { has_trait = paranoid }
+			}
+			add_trait = paranoid
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = trusting
+				}
+				NOT = { has_trait = trusting }
+			}
+			add_trait = trusting
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = cruel
+				}
+				NOT = { has_trait = cruel }
+			}
+			add_trait = cruel
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = vengeful
+				}
+				NOT = { has_trait = vengeful }
+			}
+			add_trait = vengeful
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = stubborn
+				}
+				NOT = { has_trait = stubborn }
+			}
+			add_trait = stubborn
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					has_trait = sadistic
+				}
+				NOT = { has_trait = sadistic }
+			}
+			add_trait = sadistic
 		}
 	}
 }

@@ -1,0 +1,3 @@
+﻿l_english:
+ IS_ALLOWED_TO_DEVOUR_DESC:0 "[recipient.GetShortUIName|U] is a known [criminal|E] #weak ([recipient.GetExecuteReasons])#!, allowing me to devour [recipient.GetHerHim] without being viewed as a [tyrant|E]"
+ IS_ALLOWED_TO_DEVOUR_HOSTILE_RELIGION_DESC:0 "[recipient.GetShortUINamePossessive|U] faith, [recipient.GetFaith.GetName], is considered to be either #V Hostile#! or #V Evil#! by my faith, allowing me to devour [recipient.GetHerHim] without being viewed as a [tyrant|E]."
