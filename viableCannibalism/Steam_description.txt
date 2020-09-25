@@ -3,7 +3,7 @@ You can check the source code and submit your pull-requests here:
 
 [h1]Viable Cannibalism[/h1]
 
-Latest Version: 1.0.1 (Released 25.09.2020)
+Latest Version: 1.0.2 (Released 25.09.2020)
 
 [b]Viable Cannibalism is a mod that gives you the ability to convert others to cannibalism, making Ritual Cannibalism tenet somewhat useful and giving you that sweet 30 opinion bonus with every other cannibal.[/b]
 
@@ -11,14 +11,16 @@ At this moment in time, it will work just like witchcraft without the house modi
 
 As this is my first time developing mods, I ask you to report all the bugs that you might encounter so I can fix them ASAP. Also I would love to get some help with changing events descriptions, because ATM they are almost identical to witchcraft ones.
 
-[b]Features
+[b]Features[/b]
 [list]
 [*]Added scheme that let's you convert anyone older than 16 and of your religion (will change) to cannibalism.
 [*]Events corresponding to successful conversion or failure.
 [*]AI will convert other's itself, making cannibalism more common.
-[/list]
-
-[b]Most recent changelog
-[list]
 [*]Moved from CK2 very rare event that let's you become cannibal if you're lunatic
 [/list]
+
+[b]Most recent changelog[/b]
+[list]
+[*] Added the ability to devour your prisoners!
+[/list]
+[spoiler]This has a 50% chance to do nothing, 40% chance to gain some illness and 10% to gain your victim's traits. Heads of faith of different religions have a 100% chance to give you their traits. Every trait except beauty traits can be gained[/spoiler]
