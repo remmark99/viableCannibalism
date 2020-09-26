@@ -1,3 +1,5 @@
 ﻿l_english:
  msg_devour_prisoner:0 "Prisoner Devoured"
  msg_devour_prisoner_desc:0 "[recipient.GetTitledFirstName] was eaten alive by you"
+ devour_prisoner_ill.tt:0 "Something doesn't feel right..."
+ devour_prisoner_power.tt:0 "I can feel the power flowing through my veins!"

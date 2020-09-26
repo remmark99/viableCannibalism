@@ -3,16 +3,18 @@ You can check the source code and submit your pull-requests here:
 
 [h1]Viable Cannibalism[/h1]
 
-Latest Version: 1.0.2 (Released 25.09.2020)
+Latest Version: 1.0.3 (Released 25.09.2020)
 
-[b]Viable Cannibalism is a mod that gives you the ability to convert others to cannibalism, making Ritual Cannibalism tenet somewhat useful and giving you that sweet 30 opinion bonus with every other cannibal.[/b]
+[b]Viable Cannibalism is a mod that gives you the ability to convert others to cannibalism, making Ritual Cannibalism tenet somewhat useful and giving you that sweet 30 opinion bonus with every other cannibal. For those who wish to become cannibal, there is a decision that let's you do this, and for those who already possess the power, there is an ability to devour your foes and get their powers! [/b]
 
-At this moment in time, it will work just like witchcraft without the house modifier and the ability to host grand rite (which is implemented, but needs a mod to work). In the future, I am planning to add house modifier, cannibal feast events and the ability to gain your poor dinner's powers, maybe even immortality...
+At this moment in time, it will work just like witchcraft without the house modifier and the ability to host grand rite (which is implemented, but needs a mod to work). In the future, I am planning to add house modifier, cannibal feast decision and more cannibal events in general.
 
 As this is my first time developing mods, I ask you to report all the bugs that you might encounter so I can fix them ASAP. Also I would love to get some help with changing events descriptions, because ATM they are almost identical to witchcraft ones.
 
 [b]Features[/b]
 [list]
+[*]Added the decision to become cannibal for a massive stress gain
+[*]Added the ability to devour your prisoners!(*)
 [*]Added scheme that let's you convert anyone older than 16 and of your religion (will change) to cannibalism.
 [*]Events corresponding to successful conversion or failure.
 [*]AI will convert other's itself, making cannibalism more common.
@@ -21,6 +23,7 @@ As this is my first time developing mods, I ask you to report all the bugs that 
 
 [b]Most recent changelog[/b]
 [list]
-[*] Added the ability to devour your prisoners!
+[*]Added the major decision "Dynasty of Cannibals" that gives your dynasty a new house modifier
+[*]Fixed a bug that made AI guardians instanly convert their wards to cannibalism when they reach 14
 [/list]
-[spoiler]This has a 50% chance to do nothing, 40% chance to gain some illness and 10% to gain your victim's traits. Heads of faith of different religions have a 100% chance to give you their traits. Every trait except beauty traits can be gained[/spoiler]
+*[spoiler]This has a 50% chance to do nothing, 40% chance to gain some illness and 10% to gain your victim's traits. Heads of faith of different religions have a 100% chance to give you their traits. Every trait except beauty traits can be gained. You get ALL the traits that your victim had and you didn't, but some traits can't be gained if you have their opposite version (e.g. deceitful - honest)[/spoiler]

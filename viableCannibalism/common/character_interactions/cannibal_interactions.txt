@@ -381,63 +381,85 @@ devour_prisoner_interaction = {
 				else = {
 					random_list = {
 						50 = { }
-						20 = { # Become ill
-							show_as_tooltip = { add_trait = ill }
-							hidden_effect = {
-								trigger_event = {
-									id = health.1001
-									days = { 3 10 }
-								}
-							}
-						}
-						10 = { # Get consumption
-							show_as_tooltip = { add_trait = consumption }
-							hidden_effect = {
-								trigger_event = {
-									id = health.1006
-									days = { 3 10 }
-								}
-							}
-						}
-						10 = { # Get pneumonia
-							show_as_tooltip = { add_trait = pneumonic }
-							hidden_effect = {
-								trigger_event = {
-									id = health.1002
-									days = { 3 10 }
-								}
-							}
-						}
-						# 40 = { # Get sick
-						# 	random_list = {
-						# 		50 = { # Ill
-						# 			hidden_effect = {
-						# 				trigger_event = {
-						# 					id = health.1001
-						# 					days = { 3 10 }
-						# 				}
-						# 			}
+						# 20 = { # Become ill
+						# 	hidden_effect = {
+						# 		trigger_event = {
+						# 			id = health.1001
+						# 			days = { 3 10 }
 						# 		}
-						# 		25 = {
-						# 			hidden_effect = {
-						# 				trigger_event = {
-						# 					id = health.1006
-						# 					days = { 3 10 }
-						# 				}
-						# 			}
+						# 	}
+						# 	modifier = {
+						# 		scope:actor.house = {
+						# 			has_house_modifier = dynasty_of_cannibals
 						# 		}
-						# 		25 = {
-						# 			hidden_effect = {
-						# 				trigger_event = {
-						# 					id = health.1002
-						# 					days = { 3 10 }
-						# 				}
-						# 			}
+						# 		add = -10
+						# 	}
+						# }
+						# 10 = { # Get consumption
+						# 	show_as_tooltip = { add_trait = consumption }
+						# 	hidden_effect = {
+						# 		trigger_event = {
+						# 			id = health.1006
+						# 			days = { 3 10 }
 						# 		}
 						# 	}
 						# }
+						# 10 = { # Get pneumonia
+						# 	show_as_tooltip = { add_trait = pneumonic }
+						# 	hidden_effect = {
+						# 		trigger_event = {
+						# 			id = health.1002
+						# 			days = { 3 10 }
+						# 		}
+						# 	}
+						# }
+						40 = { # Get sick
+							custom_tooltip = devour_prisoner_ill.tt
+							modifier = {
+								scope:actor.house = {
+									has_house_modifier = dynasty_of_cannibals
+								}
+								add = -10
+							}
+							hidden_effect = {
+								random_list = {
+									50 = { # Ill
+										hidden_effect = {
+											trigger_event = {
+												id = health.1001
+												days = { 3 10 }
+											}
+										}
+									}
+									25 = { # Consumption
+										hidden_effect = {
+											trigger_event = {
+												id = health.1006
+												days = { 3 10 }
+											}
+										}
+									}
+									25 = { # Pneumonia
+										hidden_effect = {
+											trigger_event = {
+												id = health.1002
+												days = { 3 10 }
+											}
+										}
+									}
+								}
+							}
+						}
 						10 = { # Gain power
+							custom_tooltip = devour_prisoner_power.tt
 							trigger_event = cannibal.4001
+
+							modifier = {
+								scope:actor.house = {
+									has_house_modifier = dynasty_of_cannibals
+								}
+								add = 10
+							}
 						}
 					}
 				}

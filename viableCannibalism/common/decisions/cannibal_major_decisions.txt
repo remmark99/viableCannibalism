@@ -1,0 +1,61 @@
+dynasty_of_cannibals_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	major = yes
+	ai_check_interval = 0
+	desc = dynasty_of_cannibals_decision_desc
+
+	is_shown = {
+		OR = {
+			has_trait = cannibal
+			any_secret = { secret_type = secret_cannibal }
+		}
+		exists = house
+		NOT = { house = { has_house_modifier = dynasty_of_cannibals } }
+	}
+
+	is_valid = {
+		is_house_head = yes
+		trigger_if = {
+			limit = {
+				exists = player_heir
+				player_heir = {
+					is_child_of = root
+					house = root.house
+				}
+			}
+			knows_about_character_being_cannibal_trigger = { CHARACTER = player_heir }
+		}
+		#We want a certain % to be cannibals but also a minimum amount. So if the house is small, we use a minimum number, and if the house is larger we use %
+		trigger_if = {
+			limit = {
+				house = {
+					any_adult_house_member = {
+						always = yes
+						count <= 6
+					}
+				}
+			}
+			house = {
+				any_adult_house_member = {
+					count >= 4
+					is_cannibal_known_by_trigger = { CHARACTER = root }
+				}
+			}
+		}
+		trigger_else = {
+			house = {
+				any_adult_house_member = {
+					percent >= 0.6
+					is_cannibal_known_by_trigger = { CHARACTER = root }
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+	}
+
+	effect = {
+		dynasty_of_cannibals_decision_effects = yes
+	}
+}

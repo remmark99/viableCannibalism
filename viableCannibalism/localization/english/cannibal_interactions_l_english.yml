@@ -1,3 +1,7 @@
 ﻿l_english:
  IS_ALLOWED_TO_DEVOUR_DESC:0 "[recipient.GetShortUIName|U] is a known [criminal|E] #weak ([recipient.GetExecuteReasons])#!, allowing me to devour [recipient.GetHerHim] without being viewed as a [tyrant|E]"
  IS_ALLOWED_TO_DEVOUR_HOSTILE_RELIGION_DESC:0 "[recipient.GetShortUINamePossessive|U] faith, [recipient.GetFaith.GetName], is considered to be either #V Hostile#! or #V Evil#! by my faith, allowing me to devour [recipient.GetHerHim] without being viewed as a [tyrant|E]."
+ CHARCTER_HAS_A_CANNIBAL_SECRET_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
+ CHARCTER_HAS_A_CANNIBAL_SECRET_NOT_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
+ HAS_A_CANNIBAL_SECRET_KNOWN_BY_CHARACTER:0 "Has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
+ convert_to_cannibal:0 "Convert to Cannibalism"

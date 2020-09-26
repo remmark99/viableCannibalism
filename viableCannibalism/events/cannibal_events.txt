@@ -27,11 +27,14 @@ cannibal.1001 = {
 	}
 
 	immediate = {
-		#If child (and guardian?) is AI, immediately convert them
+		#If child (and guardian?) is AI and house has dynasty of cannibals modifier, immediately convert them
 		if = {
 			limit = {
 				is_ai = yes
 				exists = house
+				house = {
+					has_house_modifier = dynasty_of_cannibals
+				}
 			}
 			house = {
 				house_head = {
@@ -62,7 +65,7 @@ cannibal.1001 = {
 				}
 			}
 		}
-		#For player children (or guardian?), send guardian choice event
+		#For player children (or guardian?) or childrent without dynasty of cannibals house modifier, send guardian choice event
 		else = {
 			save_scope_as = child
 			random_relation = { type = guardian trigger_event = cannibal.1002 }
@@ -203,6 +206,16 @@ cannibal.1002 = {
 			base = 100
 
 			ai_boldness_target_modifier = { VALUE = 50 }
+
+			# Player children of dynasty of cannibals should always be asked
+			modifier = {
+				scope:child = {
+					exists = house
+					house = { has_modifier = dynasty_of_cannibals }
+					is_ai = no
+				}
+				add = 1000
+			}
 		}
 	}
 
@@ -221,6 +234,16 @@ cannibal.1002 = {
 					trait_is_criminal_in_faith_trigger = { TRAIT = cannibal FAITH = liege.faith GENDER_CHARACTER = root }
 				}
 				add = 100
+			}
+
+			# Player children of dynasty of cannibals should always be asked
+			modifier = {
+				scope:child = {
+					exists = house
+					house = { has_modifier = dynasty_of_cannibals }
+					is_ai = no
+				}
+				add = -1000
 			}
 		}
 	}
@@ -559,6 +582,15 @@ cannibal.2003 = {
 	option = {
 		trigger = { cannibal_2003_unlock_reveal_trigger = yes }
 		name = cannibal.2003.b
+
+		# TODO: Add when grand feast will be implemented
+		# if = {
+		# 	limit = {
+		# 		exists = house
+		# 		house = { has_house_modifier = dynasty_of_cannibals }
+		# 	}
+		# 	custom_tooltip = cannibal.2003.b.tt
+		# }
 
 		scope:target = {
 			send_interface_message = {

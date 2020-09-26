@@ -1,0 +1,5 @@
+dynasty_of_cannibals = {
+	icon = feast_positive
+	health = 0.1
+	dread_baseline_add = 10
+}

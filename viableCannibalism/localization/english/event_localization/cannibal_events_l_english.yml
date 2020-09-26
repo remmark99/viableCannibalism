@@ -100,11 +100,6 @@
  cannibal.4001.desc:0 "By consuming the very life force of [recipient.GetTitledFirstName], I've also gained a part of [recipient.GetHerHis] personality and strength!"
  cannibal.4001.devour:0 "Unlimited power!"
 
- CHARCTER_HAS_A_CANNIBAL_SECRET_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
- CHARCTER_HAS_A_CANNIBAL_SECRET_NOT_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
- HAS_A_Cannibal_SECRET_KNOWN_BY_CHARACTER:0 "Has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
- convert_to_cannibal:0 "Convert to Cannibalism"
-
  CONVERT_TO_CANNIBALISM_SUCCESS_DESC:0 "[TARGET_CHARACTER.GetShortUIName|U] becomes a Cannibal"
 
  SCHEME_I_AM_NOT_CANNIBAL:1 "You are not a cannibal: $VALUE|0=-+$"
