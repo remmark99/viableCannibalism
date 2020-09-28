@@ -31,3 +31,207 @@ is_cannibal_known_by_trigger = {
 		}
 	}
 }
+
+is_blackmailable_secret_trigger = { #Should not include is known
+	$PARTICIPANT$ = { save_temporary_scope_as = is_blackmailable_secret_participant }
+	$BLACKMAILER$ = { save_temporary_scope_as = is_blackmailable_secret_blackmailer }
+	is_shunned_or_criminal_for = scope:is_blackmailable_secret_participant
+	can_be_exposed_by = scope:is_blackmailable_secret_blackmailer
+	#Can we actually add a hook of the correct type
+	trigger_if = {
+		limit = { is_shunned_for = scope:is_blackmailable_secret_participant }
+		custom_description = {
+			text = "already_has_a_superior_hook"
+			subject = scope:is_blackmailable_secret_blackmailer
+			object = scope:is_blackmailable_secret_participant
+			scope:is_blackmailable_secret_blackmailer = {
+				can_add_hook = {
+					type = weak_blackmail_hook
+					target = scope:is_blackmailable_secret_participant
+				}
+			}
+		}
+	}
+	trigger_if = {
+		limit = { is_criminal_for = scope:is_blackmailable_secret_participant }
+		custom_description = {
+			text = "already_has_a_superior_hook"
+			subject = scope:is_blackmailable_secret_blackmailer
+			object = scope:is_blackmailable_secret_participant
+			scope:is_blackmailable_secret_blackmailer = {
+				can_add_hook = {
+					type = strong_blackmail_hook
+					target = scope:is_blackmailable_secret_participant
+				}
+			}
+		}
+	}
+	#Some things you can't blackmail others about
+	custom_description = {
+		text = "cant_blackmail_another_witch"
+		subject = scope:is_blackmailable_secret_blackmailer
+		NAND = {
+			secret_type = secret_witch
+			scope:is_blackmailable_secret_blackmailer = { is_witch_trigger = yes }
+		}
+	}
+	custom_description = {
+		text = "cant_blackmail_another_cannibal"
+		subject = scope:is_blackmailable_secret_blackmailer
+		NAND = {
+			secret_type = secret_cannibal
+			scope:is_blackmailable_secret_blackmailer = { is_cannibal_trigger = yes }
+		}
+	}
+	trigger_if = {
+		limit = { secret_type = secret_lover }
+		custom_description = {
+			text = cannot_blackmail_own_lover_secret
+			NOT = { secret_target = scope:is_blackmailable_secret_blackmailer }
+		}
+	}
+	trigger_if = {
+		limit = {
+			secret_type = secret_unmarried_illegitimate_child
+		}
+		custom_description = {
+			text = cannot_blackmail_over_own_bastard
+			NOT = { secret_target = scope:is_blackmailable_secret_blackmailer }
+		}
+	}
+	trigger_if = {
+		limit = {
+			secret_type = secret_disputed_heritage
+		}
+		custom_description = {
+			text = cannot_blackmail_over_own_bastard
+			NOT = {
+				secret_target = {
+					OR = {
+						mother = scope:is_blackmailable_secret_blackmailer
+						real_father = scope:is_blackmailable_secret_blackmailer
+					}
+				}
+			}
+		}
+	}
+}
+
+#Simple Check if a given Secret Type is blackmailable
+	# NOTE THAT THIS CAN ONLY EVER CORRECTLY EVALUATE SECRETS THAT THE TARGET DOES NOT ALREADY HAVE
+	# ALSO NOTE THAT IT WILL ONLY EVER RETURN TRUE FOR SECRETS THAT ARE NOT RELIANT ON HAVING A VALID TARGET
+secret_type_is_blackmailable_simple_trigger = {
+	# TYPE
+	# TARGET
+
+	save_temporary_scope_value_as = {
+		name = type_flag
+		value = flag:$TYPE$
+	}
+
+	trigger_if = {
+		limit = {
+			scope:type_flag = flag:secret_deviant
+		}
+		secret_deviant_is_valid_trigger = {
+			OWNER = $TARGET$
+		}
+		OR = {
+			secret_deviant_is_shunned_trigger = {
+				OWNER = $TARGET$
+			}
+			secret_deviant_is_criminal_trigger = {
+				OWNER = $TARGET$
+			}
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			scope:type_flag = flag:secret_homosexual
+		}
+		secret_homosexual_is_valid_trigger = {
+			OWNER = $TARGET$
+		}
+		OR = {
+			secret_homosexual_is_shunned_trigger = {
+				OWNER = $TARGET$
+			}
+			secret_homosexual_is_criminal_trigger = {
+				OWNER = $TARGET$
+			}
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			scope:type_flag = flag:secret_cannibal
+		}
+		secret_cannibal_is_valid_trigger = {
+			OWNER = $TARGET$
+		}
+		OR = {
+			secret_cannibal_is_shunned_trigger = {
+				OWNER = $TARGET$
+			}
+			secret_cannibal_is_criminal_trigger = {
+				OWNER = $TARGET$
+			}
+		}
+		NOT = {
+			$BLACKMAILER$ = { is_cannibal_trigger = yes }
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			scope:type_flag = flag:secret_non_believer
+		}
+		secret_non_believer_is_valid_trigger = {
+			OWNER = $TARGET$
+		}
+		OR = {
+			secret_non_believer_is_shunned_trigger = {
+				OWNER = $TARGET$
+			}
+			secret_non_believer_is_criminal_trigger = {
+				OWNER = $TARGET$
+			}
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			scope:type_flag = flag:secret_incest
+		}
+		secret_incest_is_valid_trigger = {
+			OWNER = $TARGET$
+		}
+		OR = {
+			secret_incest_is_shunned_trigger = {
+				OWNER = $TARGET$
+			}
+			secret_incest_is_criminal_trigger = {
+				OWNER = $TARGET$
+			}
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			scope:type_flag = flag:secret_witch
+		}
+		secret_witch_is_valid_trigger = {
+			OWNER = $TARGET$
+		}
+		OR = {
+			secret_witch_is_shunned_trigger = {
+				OWNER = $TARGET$
+			}
+			secret_witch_is_criminal_trigger = {
+				OWNER = $TARGET$
+			}
+		}
+		NOT = {
+			$BLACKMAILER$ = { is_witch_trigger = yes }
+		}
+	}
+	trigger_else = { #Murder stuff, Bastard secrets, etc.
+		always = no
+	}
+}

@@ -3,3 +3,7 @@ has_a_cannibal_secret_known_by_character = {
 	third_not = CHARCTER_HAS_A_CANNIBAL_SECRET_NOT_KNOWN_BY_CHARACTER
 	global = HAS_A_CANNIBAL_SECRET_KNOWN_BY_CHARACTER
 }
+
+cant_blackmail_another_cannibal = {
+	first_not = I_CANNOT_BLACKMAIL_ANOTHER_CANNIBAL
+}

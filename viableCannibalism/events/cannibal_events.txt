@@ -377,13 +377,7 @@ cannibal.2002 = {
 	title = cannibal.2002.t
 	desc = {
 		desc = cannibal.2002.start.desc
-		first_valid = {
-			triggered_desc = {
-				trigger = { exists = scope:scheme_discovered }
-				desc = cannibal.2002.discovery.desc
-			}
-			desc = cannibal.2002.no_discovery.desc
-		}
+		desc = cannibal.2002.taste.desc
 		desc = cannibal.2002.end.desc
 	}
 	theme = witchcraft
@@ -396,6 +390,10 @@ cannibal.2002 = {
 			trigger = { scope:left_portrait = root }
 			animation = disbelief
 		}
+		animation = personality_dishonorable
+	}
+	right_portrait = {
+		character = scope:owner
 		animation = personality_dishonorable
 	}
 	
@@ -444,7 +442,6 @@ cannibal.2002 = {
 		stress_impact = {
 			zealous = massive_stress_impact_gain
 			craven = medium_stress_impact_gain
-			gluttonous = medium_stress_impact_loss
 		}
 	}
 
@@ -832,7 +829,18 @@ cannibal.2004 = {
 	}
 	
 	option = {
+		trigger = { exists = scope:scheme_discovered }
 		name = cannibal.2004.a
+		flavor = cannibal.2005.a.tt
+
+		scope:scheme = {
+			end_scheme = yes
+		}
+	}
+
+	option = {
+		trigger = { NOT = { exists = scope:scheme_discovered } }
+		name = cannibal.2004.b
 
 		scope:scheme = {
 			end_scheme = yes

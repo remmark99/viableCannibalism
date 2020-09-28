@@ -5,3 +5,4 @@
  CHARCTER_HAS_A_CANNIBAL_SECRET_NOT_KNOWN_BY_CHARACTER:0 "[CHARACTER.GetShortUIName|U] has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
  HAS_A_CANNIBAL_SECRET_KNOWN_BY_CHARACTER:0 "Has a Cannibal [secret|E] known by [TARGET_CHARACTER.GetShortUIName]"
  convert_to_cannibal:0 "Convert to Cannibalism"
+ I_CANNOT_BLACKMAIL_ANOTHER_CANNIBAL:0 "I cannot blackmail another [GetTrait('cannibal').GetName( CHARACTER.Self )] for being a Cannibal"
